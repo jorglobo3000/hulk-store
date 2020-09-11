@@ -32,8 +32,6 @@ public class PersonaRestControlador {
 
 	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
 	public Persona crearPersona(@RequestBody Persona persona) {
-		System.out.println(persona.getNombre());
-		
 		return personaServicio.guardar(persona);
 	}
 }

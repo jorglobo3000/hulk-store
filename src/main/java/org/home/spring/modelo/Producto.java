@@ -20,6 +20,10 @@ import javax.persistence.Table;
 import org.home.spring.modelo.enumerado.EstadoEnum;
 
 /**
+ * Clase que mapea la tabla productos, que permite el registro de productos para
+ * realizar las diferentes ventas
+ * 
+ * 
  * @author casa
  *
  */

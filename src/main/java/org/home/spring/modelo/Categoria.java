@@ -17,6 +17,9 @@ import javax.persistence.Table;
 import org.home.spring.modelo.enumerado.EstadoEnum;
 
 /**
+ * Entidad que mapea la tabla categorias, permite agrupar los productos de la
+ * tienda
+ * 
  * @author casa
  *
  */

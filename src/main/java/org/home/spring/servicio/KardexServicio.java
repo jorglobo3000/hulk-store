@@ -17,6 +17,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
+ * Clase encargada de proveeer los metodos para registrar los diferentes
+ * movimientos de un producto
+ * 
  * @author casa
  *
  */
@@ -29,6 +32,12 @@ public class KardexServicio {
 	@Autowired
 	private ProductoServicio productoServicio;
 
+	/**
+	 * Metodo encargado de registrar un ingreso de un producto
+	 * 
+	 * @param detalleDocumento
+	 * @param tipoOperacion
+	 */
 	@Transactional
 	public void registrarKardexIngreso(DetalleDocumento detalleDocumento, TipoOperacionEnum tipoOperacion) {
 		Kardex kardex = registrarKardex(detalleDocumento);
@@ -46,6 +55,12 @@ public class KardexServicio {
 		productoServicio.guardar(producto);
 	}
 
+	/**
+	 * Metodo encargado de registrar un egreso de un producto
+	 * 
+	 * @param detalleDocumento
+	 * @param tipoOperacion
+	 */
 	@Transactional
 	public void registrarKardexEgreso(DetalleDocumento detalleDocumento, TipoOperacionEnum tipoOperacion) {
 		Kardex kardex = registrarKardex(detalleDocumento);
@@ -71,6 +86,12 @@ public class KardexServicio {
 		return kardex;
 	}
 
+	/**
+	 * Metodo que permite obtener la lista de movimientos de un producto conocido
+	 * 
+	 * @param producto
+	 * @return
+	 */
 	@Transactional(readOnly = true)
 	public List<Kardex> obtenerKardexProducto(Producto producto) {
 		return kardexDao.findByProducto(producto);

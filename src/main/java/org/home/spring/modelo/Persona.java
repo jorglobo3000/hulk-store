@@ -18,6 +18,9 @@ import org.home.spring.modelo.enumerado.EstadoEnum;
 import org.home.spring.modelo.enumerado.TipoPersonaEnum;
 
 /**
+ * Clase que mapea la tabla personas que permite el registro de personas tanto
+ * proveedores, asi como tambien clientes
+ * 
  * @author casa
  *
  */
@@ -155,5 +158,4 @@ public class Persona implements Serializable {
 		this.password = password;
 	}
 
-	
 }

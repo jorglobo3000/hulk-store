@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
+ * Clase que maneja los metodos de guardar para los items de un documento
+ * 
  * @author casa
  *
  */
@@ -22,8 +24,8 @@ public class DetalleDocumentoServicio {
 	private DetalleDocumentoDao detalleDocumentoDao;
 
 	@Transactional
-	public void guardar(DetalleDocumento detalleMovimiento) {
-		detalleDocumentoDao.save(detalleMovimiento);
+	public DetalleDocumento guardar(DetalleDocumento detalleMovimiento) {
+		return detalleDocumentoDao.save(detalleMovimiento);
 	}
 
 	@Transactional

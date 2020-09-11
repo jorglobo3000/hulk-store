@@ -28,9 +28,10 @@ import org.home.spring.modelo.enumerado.EstadoEnum;
 import org.home.spring.modelo.enumerado.FormaPagoEnum;
 import org.home.spring.modelo.enumerado.TipoDocumentoEnum;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 /**
+ * Entidad que mapea a la tabla Documentos, que permite registrar los documentos
+ * que generan un movimiento en el kardex de productos
+ * 
  * @author casa
  *
  */
@@ -204,5 +205,4 @@ public class Documento implements Serializable {
 		this.numeroDocumento = numeroDocumento;
 	}
 
-	
 }

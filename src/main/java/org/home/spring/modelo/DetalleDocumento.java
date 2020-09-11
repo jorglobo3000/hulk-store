@@ -20,11 +20,14 @@ import javax.persistence.Table;
 import org.home.spring.modelo.enumerado.EstadoEnum;
 
 /**
+ * Entidad que mapea la tabla detalles_documento, donde se registrara el detalle
+ * del documento(cabecera)
+ * 
  * @author casa
  *
  */
 @Entity
-@Table(name = "DetallesDocumento")
+@Table(name = "Detalles_documento")
 public class DetalleDocumento implements Serializable {
 
 	/**
@@ -61,8 +64,6 @@ public class DetalleDocumento implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	
 
 	public Documento getDocumento() {
 		return documento;

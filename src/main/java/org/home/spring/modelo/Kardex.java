@@ -26,6 +26,9 @@ import org.home.spring.modelo.enumerado.TipoOperacionEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
+ * Clase que representa a la tabla kardex y que permite llevar el historico de
+ * movimientos realizados en un producto
+ * 
  * @author casa
  *
  */
