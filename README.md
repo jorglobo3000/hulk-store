@@ -1,4 +1,4 @@
-#Sistema kardex **"Hulk Store"**
+# Sistema kardex **"Hulk Store"**
 
 Una tienda donde se desarrolla el emprendimiento que permite vender a sus empleados diferentes productos basados en superhéroes de Marvel y Dc Comics.
 
@@ -10,7 +10,7 @@ Entre los artículos se encuentran:
 - Accesorios
 - Varios más
 
-##Sistema de kardex
+## Sistema de kardex
 
 El sistema está dividido en capas como es: 
 - Modelo.- encargado del mapeo de entidades y enumeradores
