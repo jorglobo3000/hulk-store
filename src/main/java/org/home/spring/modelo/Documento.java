@@ -64,12 +64,6 @@ public class Documento implements Serializable {
 	@Column(name = "tipo_documento")
 	private TipoDocumentoEnum tipoDocumento;
 
-	@Column(name = "valor_subtotal", nullable = false, precision = 15, scale = 4)
-	private BigDecimal valorSubtotal;
-
-	@Column(name = "valor_total", nullable = false, precision = 15, scale = 4)
-	private BigDecimal valorTotal;
-
 	@Enumerated(EnumType.STRING)
 	@Column(name = "estado")
 	private EstadoEnum estado;
@@ -123,22 +117,6 @@ public class Documento implements Serializable {
 
 	public void setTipoDocumento(TipoDocumentoEnum tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
-	}
-
-	public BigDecimal getValorSubtotal() {
-		return valorSubtotal;
-	}
-
-	public void setValorSubtotal(BigDecimal valorSubtotal) {
-		this.valorSubtotal = valorSubtotal;
-	}
-
-	public BigDecimal getValorTotal() {
-		return valorTotal;
-	}
-
-	public void setValorTotal(BigDecimal valorTotal) {
-		this.valorTotal = valorTotal;
 	}
 
 	public EstadoEnum getEstado() {

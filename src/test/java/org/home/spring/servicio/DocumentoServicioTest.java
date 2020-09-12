@@ -48,8 +48,6 @@ public class DocumentoServicioTest {
 		documento.setIva(BigDecimal.ZERO);
 		documento.setPersona(personaServicio.obtenerPorId(1l));
 		documento.setSubtotal(BigDecimal.ZERO);
-		documento.setValorSubtotal(BigDecimal.ZERO);
-		documento.setValorTotal(BigDecimal.ZERO);
 		documento.setTotal(BigDecimal.ZERO);
 		documento.setTipoDocumento(TipoDocumentoEnum.CAR);
 		documento.setDetalle(new ArrayList<>());

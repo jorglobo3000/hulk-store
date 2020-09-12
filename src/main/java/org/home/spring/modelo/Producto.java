@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.home.spring.modelo.enumerado.EstadoEnum;
 
@@ -63,6 +64,9 @@ public class Producto implements Serializable {
 	@Column(name = "estado", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private EstadoEnum estado;
+
+	@Transient
+	private Boolean enStock;
 
 	public Long getId() {
 		return id;
@@ -126,6 +130,10 @@ public class Producto implements Serializable {
 
 	public void setStock(Long stock) {
 		this.stock = stock;
+	}
+
+	public Boolean getEnStock() {
+		return this.stock > 0l;
 	}
 
 }

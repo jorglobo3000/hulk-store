@@ -51,7 +51,6 @@ public class Kardex implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "id_documento")
-	@JsonIgnore
 	private Documento documento;
 
 	@Enumerated(EnumType.STRING)

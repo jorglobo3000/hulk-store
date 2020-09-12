@@ -19,6 +19,8 @@ import javax.persistence.Table;
 
 import org.home.spring.modelo.enumerado.EstadoEnum;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Entidad que mapea la tabla detalles_documento, donde se registrara el detalle
  * del documento(cabecera)
@@ -41,6 +43,7 @@ public class DetalleDocumento implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "id_documento")
+	@JsonIgnore
 	private Documento documento;
 
 	@ManyToOne
