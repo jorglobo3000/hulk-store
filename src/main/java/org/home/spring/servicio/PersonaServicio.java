@@ -69,4 +69,9 @@ public class PersonaServicio {
 		return personaDao.save(persona);
 	}
 
+	
+	@Transactional(readOnly = true)
+	public Persona obtenerPorIdentificacion(String identificacion) {
+		return personaDao.findByIdentificacion(identificacion);
+	}
 }

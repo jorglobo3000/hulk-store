@@ -20,4 +20,6 @@ public interface PersonaDao extends CrudRepository<Persona, Long> {
 	@Transactional(readOnly = true)
 	public List<Persona> findByTipoPersona(TipoPersonaEnum tipoPersona);
 	
+	public Persona findByIdentificacion(String identificacion);
+	
 }
