@@ -19,11 +19,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.home.spring.modelo.enumerado.TipoMovimientoEnum;
 import org.home.spring.modelo.enumerado.TipoOperacionEnum;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Clase que representa a la tabla kardex y que permite llevar el historico de
@@ -76,6 +76,9 @@ public class Kardex implements Serializable {
 	@Column(name = "tipo_movimiento")
 	@Enumerated(EnumType.STRING)
 	private TipoMovimientoEnum tipoMovimiento;
+	
+	@Transient
+	private String detalle;
 
 	public Long getId() {
 		return id;
@@ -157,4 +160,7 @@ public class Kardex implements Serializable {
 		this.tipoMovimiento = tipoMovimiento;
 	}
 
+	public String getDetalle() {
+		return this.tipoOperacion.getDescripcion()+" con documento: "+this.documento.getNumeroDocumento();
+	}
 }
