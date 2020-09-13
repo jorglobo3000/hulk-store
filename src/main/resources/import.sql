@@ -17,5 +17,5 @@ insert into Productos (nombre, stock, stock_emergencia, precio_compra, precio_ve
 
 --insert tabla Personas
 
-insert into Personas (ciudad, correo_electronico, direccion, identificacion, nombre, telefono, tipo_persona, username, password, estado) values ('QUITO', 'consumidor@final.com', 'Quito', '999999999', 'Consumidor final', '0', 'CLI', 'consumidor', '', 'ACT');   
+insert into Personas (ciudad, correo_electronico, direccion, identificacion, nombre, telefono, tipo_persona, username, password, estado) values ('QUITO', 'consumidor@final.com', 'Quito', '9999999999', 'Consumidor final', '0', 'CLI', 'consumidor', '', 'ACT');   
 
