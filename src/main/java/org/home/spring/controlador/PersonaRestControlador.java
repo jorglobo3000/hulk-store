@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -30,12 +29,12 @@ public class PersonaRestControlador {
 	@Autowired
 	private PersonaServicio personaServicio;
 
-	@RequestMapping(value = "/listar", method = RequestMethod.GET)
+	@GetMapping(value = "/listar")
 	public List<Persona> listarClientes() {
 		return personaServicio.listarPorTipoPersona(TipoPersonaEnum.CLI);
 	}
 
-	@RequestMapping(value = "/guardar", method = RequestMethod.POST)
+	@PostMapping(value = "/guardar")
 	public Persona crearPersona(@RequestBody Persona persona) {
 		return personaServicio.guardar(persona);
 	}
@@ -50,5 +49,10 @@ public class PersonaRestControlador {
 		Persona per = personaServicio.login(persona.getUsername(), persona.getPassword());
 		per.setPassword(null);
 		return per;
+	}
+	
+	@GetMapping(value = "/listar-tipo/[tipoPersona]")
+	public List<Persona> listarPorTipoPersona(@PathVariable String tipoPersona){
+		return personaServicio.listarPorTipoPersona(TipoPersonaEnum.valueOf(tipoPersona));
 	}
 }

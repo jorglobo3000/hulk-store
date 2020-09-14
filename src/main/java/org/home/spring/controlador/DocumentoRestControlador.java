@@ -5,6 +5,7 @@ package org.home.spring.controlador;
 
 import java.util.Date;
 
+import org.home.spring.modelo.DetalleDocumento;
 import org.home.spring.modelo.Documento;
 import org.home.spring.servicio.DocumentoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,7 @@ public class DocumentoRestControlador {
 	}
 
 	@PostMapping(value = "/comprar")
-	public Documento comprar(@RequestBody Documento documento) {
-		documento.setFecha(new Date());
+	public DetalleDocumento comprar(@RequestBody DetalleDocumento documento) {
 		return documentoServicio.comprar(documento);
 	}
 

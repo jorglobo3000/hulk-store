@@ -71,14 +71,8 @@ public class DocumentoServicio {
 	 * @return
 	 */
 	@Transactional
-	public Documento comprar(Documento documento) {
-		documento.setTipoDocumento(TipoDocumentoEnum.FAC);
-		ponerDocumento(documento);
-		documento = documentoDao.save(documento);
-
-		documento.getDetalle().forEach(item -> {
-			kardexServicio.registrarKardexIngreso(item, TipoOperacionEnum.INGC);
-		});
+	public DetalleDocumento comprar(DetalleDocumento documento) {
+			kardexServicio.registrarKardexIngreso(documento, TipoOperacionEnum.INGC);
 		return documento;
 	}
 

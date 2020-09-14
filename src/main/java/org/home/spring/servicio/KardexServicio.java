@@ -4,6 +4,7 @@
 package org.home.spring.servicio;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import org.home.spring.dao.KardexDao;
@@ -77,8 +78,13 @@ public class KardexServicio {
 	private Kardex registrarKardex(DetalleDocumento detalleDocumento) {
 		Kardex kardex = new Kardex();
 		kardex.setCantidad(detalleDocumento.getCantidad());
-		kardex.setDocumento(detalleDocumento.getDocumento());
-		kardex.setFecha(detalleDocumento.getDocumento().getFecha());
+		if (detalleDocumento.getDocumento() == null) {
+			kardex.setDocumento(null);
+			kardex.setFecha(new Date());
+		} else {
+			kardex.setDocumento(detalleDocumento.getDocumento());
+			kardex.setFecha(detalleDocumento.getDocumento().getFecha());
+		}
 		kardex.setPrecioUnitario(detalleDocumento.getProducto().getPrecioVenta()
 				.multiply(new BigDecimal(detalleDocumento.getCantidad())));
 		kardex.setProducto(detalleDocumento.getProducto());

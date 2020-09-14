@@ -3,6 +3,8 @@
  */
 package org.home.spring.modelo.enumerado;
 
+import java.util.Arrays;
+
 /**
  * @author casa
  *
@@ -13,10 +15,14 @@ public enum TipoPersonaEnum {
 	private String descripcion;
 
 	private TipoPersonaEnum(String descripcion) {
-		this.descripcion = descripcion;
+		this.descripcion = descripcion;	
 	}
 	
 	public String getDescripcion() {
 		return this.descripcion;
+	}
+	
+	public TipoPersonaEnum obtenerPorCodigo(String codigo) {
+		return Arrays.stream(TipoPersonaEnum.values()).filter(item -> item.equals(codigo)).findFirst().orElse(null);
 	}
 }
