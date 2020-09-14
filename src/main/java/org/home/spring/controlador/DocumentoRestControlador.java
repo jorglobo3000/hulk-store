@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * Controlador rest que forma parte del api de la tienda, permite registrar los
+ * 2 movimientos de los productos, mediante una compra y una venta
+ * 
  * @author casa
  *
  */
@@ -33,6 +36,14 @@ public class DocumentoRestControlador {
 	@Autowired
 	private DocumentoServicio documentoServicio;
 
+	/**
+	 * Servicio que permite al usuario administrador de la tienda, comprar productos
+	 * aumentando su stock en las existencias
+	 * 
+	 * @param documento
+	 * @return la respuesta con el detalle de la compra, en caso de ocurrir un error
+	 *         retorna un mapa con el mensaje de error y el codigo respectivo
+	 */
 	@PostMapping(value = "/comprar")
 	public ResponseEntity<?> comprar(@RequestBody DetalleDocumento documento) {
 		try {
@@ -57,6 +68,14 @@ public class DocumentoRestControlador {
 
 	}
 
+	/**
+	 * Servicio que permite al cliente registrado realizar una compra de los
+	 * productos de su carrito de compras
+	 * 
+	 * @param documento
+	 * @return retorna la factura de la compra, en caso de error retorna un mapa con
+	 *         el mensaje de error y el codigo respectivo
+	 */
 	@PostMapping(value = "/vender")
 	public ResponseEntity<?> vender(@RequestBody Documento documento) {
 		try {

@@ -29,7 +29,8 @@ public class ProductoServicio {
 	 * Metodo que permite registrar un producto
 	 * 
 	 * @param producto
-	 * @return
+	 * @return el producto persistido en la base de datos
+	 * 
 	 */
 	@Transactional
 	public Producto guardar(Producto producto) {
@@ -40,7 +41,7 @@ public class ProductoServicio {
 	 * Metodo que permite obtener un producto conociendo su id
 	 * 
 	 * @param id
-	 * @return
+	 * @return el producto con el id ingresado
 	 */
 	@Transactional(readOnly = true)
 	public Producto obtenerPorId(Long id) {
@@ -52,7 +53,7 @@ public class ProductoServicio {
 	 * realizar una venta
 	 * 
 	 * @param id
-	 * @return
+	 * @return un long con el stock del producto
 	 */
 	@Transactional(readOnly = true)
 	public Long obtenerStock(Long id) {
@@ -63,7 +64,7 @@ public class ProductoServicio {
 	/**
 	 * Metodo que lista unicamente los productos que se encuentren activos.
 	 * 
-	 * @return
+	 * @return listado de productos activos
 	 */
 	@Transactional(readOnly = true)
 	public List<Producto> obtenerActivos() {
@@ -75,7 +76,7 @@ public class ProductoServicio {
 	 * 
 	 * @param idProducto
 	 * @param cantidad
-	 * @return
+	 * @return producto luego de haber sido disminuido su inventario
 	 */
 	public Producto disminuirInventario(Long idProducto, Long cantidad) {
 		Producto producto = obtenerPorId(idProducto);
@@ -95,7 +96,7 @@ public class ProductoServicio {
 	 * 
 	 * @param idProducto
 	 * @param cantidad
-	 * @return
+	 * @return el producto luego de aumentar su inventario
 	 */
 	public Producto aumentarInventario(Long idProducto, Long cantidad) {
 		Producto producto = obtenerPorId(idProducto);

@@ -69,12 +69,19 @@ public class PersonaServicio {
 		return personaDao.save(persona);
 	}
 
-	
 	@Transactional(readOnly = true)
 	public Persona obtenerPorIdentificacion(String identificacion) {
 		return personaDao.findByIdentificacion(identificacion);
 	}
-	
+
+	/**
+	 * Metodo que permite realizar un login basico del usuario para manejar
+	 * navegabilidad en la aplacion de prueba
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	@Transactional(readOnly = true)
 	public Persona login(String username, String password) {
 		return personaDao.findByUsernameAndPassword(username, password);

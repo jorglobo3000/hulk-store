@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * Controlador rest que forma parte del api de la tienda, permite la consulta
+ * respectiva a los kardex de productos
+ * 
  * @author casa
  *
  */
@@ -36,6 +39,15 @@ public class KardexRestControlador {
 	@Autowired
 	private ProductoServicio productoServicio;
 
+	/**
+	 * Servicio que permite conocer la lista de movimientos de un producto
+	 * conociendo su id
+	 * 
+	 * @param id
+	 * @return retorna la respuesta con la lista de movimientos y de ocurrir error
+	 *         al consultar retorna un mapa con el mensaje de error y el respectivo
+	 *         codigo
+	 */
 	@GetMapping(value = "/listar/{id}")
 	public ResponseEntity<?> listar(@PathVariable Long id) {
 		try {

@@ -65,7 +65,7 @@ public class KardexServicio {
 	}
 
 	/**
-	 * Metodo que calcula el promedio ponderado cuando se realzia un movimiento para
+	 * Metodo que calcula el promedio ponderado cuando se realiza un movimiento para
 	 * aumentar el stock
 	 * 
 	 * @param detalleDocumento
@@ -105,6 +105,12 @@ public class KardexServicio {
 		productoServicio.guardar(producto);
 	}
 
+	/**
+	 * Metodo que permite registrar el kardex de un producto
+	 * 
+	 * @param detalleDocumento
+	 * @return
+	 */
 	private Kardex registrarKardex(DetalleDocumento detalleDocumento) {
 		Kardex kardex = new Kardex();
 		kardex.setCantidad(detalleDocumento.getCantidad());

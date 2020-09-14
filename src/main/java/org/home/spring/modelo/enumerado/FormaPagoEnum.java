@@ -4,6 +4,8 @@
 package org.home.spring.modelo.enumerado;
 
 /**
+ * Enumerado que permite registrar los diferentes tipos de formas de pago
+ * 
  * @author casa
  *
  */

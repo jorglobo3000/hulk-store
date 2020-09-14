@@ -23,11 +23,24 @@ public class DetalleDocumentoServicio {
 	@Autowired
 	private DetalleDocumentoDao detalleDocumentoDao;
 
+	/**
+	 * Metodo que permite persistir el detalle en la base de datos
+	 * 
+	 * @param detalleMovimiento
+	 * @return
+	 */
 	@Transactional
 	public DetalleDocumento guardar(DetalleDocumento detalleMovimiento) {
 		return detalleDocumentoDao.save(detalleMovimiento);
 	}
 
+	/**
+	 * Metodo que permite persistir en la base de datos todos los items de un
+	 * documento
+	 * 
+	 * @param listaDetalle
+	 * @return
+	 */
 	@Transactional
 	public List<DetalleDocumento> guardarTodos(List<DetalleDocumento> listaDetalle) {
 		return (List<DetalleDocumento>) detalleDocumentoDao.saveAll(listaDetalle);

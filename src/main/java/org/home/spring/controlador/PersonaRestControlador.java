@@ -23,6 +23,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * Controlador Rest que forma parte del api de la tienda, permite el acceso a
+ * los servicios para manejo de personas
+ * 
+ * 
  * @author casa
  *
  */
@@ -34,16 +38,18 @@ public class PersonaRestControlador {
 	@Autowired
 	private PersonaServicio personaServicio;
 
-	@GetMapping(value = "/listar")
-	public List<Persona> listarClientes() {
-		return personaServicio.listarPorTipoPersona(TipoPersonaEnum.CLI);
-	}
-
 	@PostMapping(value = "/guardar")
 	public Persona crearPersona(@RequestBody Persona persona) {
 		return personaServicio.guardar(persona);
 	}
 
+	/**
+	 * Servicio que permite obetner una persona conociendo su identificacion
+	 * 
+	 * @param identificacion
+	 * @return respuesa con la persona y el codigo de error, en caso de error
+	 *         retorna mapa con el mensaje de error y el codigo respectivo
+	 */
 	@GetMapping(value = "listar/{identificacion}")
 	public ResponseEntity<?> buscarPorIdentificacion(@PathVariable String identificacion) {
 		try {
@@ -56,19 +62,27 @@ public class PersonaRestControlador {
 		}
 	}
 
+	/**
+	 * Servicio basico de autenticacion a la tienda usado para tener navegabilidad
+	 * entre las opciones de administrador y opciones del cliente
+	 * 
+	 * @param persona
+	 * @return respuesta con la persona y en caso de error retorna un mapa con el
+	 *         mensaje de error y el codigo respectivo
+	 */
 	@PostMapping(value = "login")
 	public ResponseEntity<?> obtenerPorLogin(@RequestBody Persona persona) {
 		try {
 			Persona per = personaServicio.login(persona.getUsername(), persona.getPassword());
-			if(per==null) {
+			if (per == null) {
 				Map<String, String> respuesta = new HashMap<>();
 				respuesta.put("mensaje", "No se encuentra registrado en la base de datos");
-				return new ResponseEntity<Map<String, String>>(respuesta, HttpStatus.NOT_FOUND);	
+				return new ResponseEntity<Map<String, String>>(respuesta, HttpStatus.NOT_FOUND);
 			}
-			
+
 			per.setPassword(null);
 			return new ResponseEntity<Persona>(per, HttpStatus.OK);
-			
+
 		} catch (Exception e) {
 			Map<String, String> respuesta = new HashMap<>();
 			respuesta.put("mensaje", "Usuario o contraseña incorrecta");
@@ -76,6 +90,12 @@ public class PersonaRestControlador {
 		}
 	}
 
+	/**
+	 * Servicio que permite listar las personas conociento el tipo
+	 * 
+	 * @param tipoPersona
+	 * @return lista de personas
+	 */
 	@GetMapping(value = "/listar-tipo/[tipoPersona]")
 	public List<Persona> listarPorTipoPersona(@PathVariable String tipoPersona) {
 		return personaServicio.listarPorTipoPersona(TipoPersonaEnum.valueOf(tipoPersona));
