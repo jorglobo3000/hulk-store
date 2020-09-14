@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 
 /**
  * @author casa
@@ -31,12 +32,15 @@ public class ProductoRestControladorTest {
 
 	@Test
 	public void deberiaObtenerStock() {
-		Assertions.assertTrue(productoRestControlador.obtenerStock(1l) > 0l);
+		ResponseEntity<?> respuesta = productoRestControlador.obtenerStock(1l);
+		Long stock = (Long) respuesta.getBody();
+		Assertions.assertTrue(stock > 0l);
 	}
-	
+
 	@Test
 	public void deberiaGuardar() {
-		Producto producto = productoRestControlador.obtenerPorId(1l);
+		ResponseEntity<?> respuesta = productoRestControlador.obtenerPorId(1l);
+		Producto producto = (Producto) respuesta.getBody();
 		producto.setStock(10000l);
 		Assertions.assertNotNull(productoRestControlador.guardar(producto));
 	}

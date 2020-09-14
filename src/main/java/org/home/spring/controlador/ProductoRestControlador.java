@@ -49,7 +49,7 @@ public class ProductoRestControlador {
 	public ResponseEntity<?> obtenerPorId(@PathVariable Long id) {
 		try {
 			Producto producto = productoServicio.obtenerPorId(id);
-			if(producto == null) {
+			if (producto == null) {
 				Map<String, String> respuesta = new HashMap<>();
 				respuesta.put("mensaje", "El producto no existe en la base de datos");
 				return new ResponseEntity<Map<String, String>>(respuesta, HttpStatus.NOT_FOUND);
@@ -63,12 +63,26 @@ public class ProductoRestControlador {
 	}
 
 	@PostMapping(value = "/guardar")
-	public Producto guardar(@RequestBody Producto producto) {
-		return productoServicio.guardar(producto);
+	public ResponseEntity<?> guardar(@RequestBody Producto producto) {
+		try {
+			Producto product = productoServicio.guardar(producto);
+			return new ResponseEntity<Producto>(product, HttpStatus.OK);
+		} catch (DataAccessException e) {
+			Map<String, String> respuesta = new HashMap<>();
+			respuesta.put("mensaje", "Ocurrio un error al listar los productos");
+			return new ResponseEntity<Map<String, String>>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@GetMapping(value = "/stock/{id}")
-	public Long obtenerStock(@PathVariable Long id) {
-		return productoServicio.obtenerStock(id);
+	public ResponseEntity<?> obtenerStock(@PathVariable Long id) {
+		try {
+			Long stock = productoServicio.obtenerStock(id);
+			return new ResponseEntity<Long>(stock, HttpStatus.OK);
+		} catch (DataAccessException e) {
+			Map<String, String> respuesta = new HashMap<>();
+			respuesta.put("mensaje", "Ocurrio un error al obtener stock");
+			return new ResponseEntity<Map<String, String>>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 }

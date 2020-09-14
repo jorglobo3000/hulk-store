@@ -62,6 +62,7 @@ public class DocumentoServicio {
 		documento = documentoDao.save(documento);
 		documento.setNumeroDocumento("001-001-" + documento.getId().toString());
 		documento.getDetalle().forEach(item -> kardexServicio.registrarKardexEgreso(item, TipoOperacionEnum.SALC));
+	System.out.println(documento);
 		return documento;
 	}
 
@@ -80,6 +81,7 @@ public class DocumentoServicio {
 								.multiply(new BigDecimal(documento.getProducto().getPorcentajeUtilidad()))
 								.divide(new BigDecimal(100))));
 		kardexServicio.registrarKardexIngreso(documento, TipoOperacionEnum.INGC);
+		System.out.println(documento);
 		return documento;
 	}
 
