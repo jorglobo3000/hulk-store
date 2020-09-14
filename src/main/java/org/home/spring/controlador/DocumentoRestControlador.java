@@ -28,10 +28,6 @@ public class DocumentoRestControlador {
 	@Autowired
 	private DocumentoServicio documentoServicio;
 
-	@PostMapping(value = "/guardar")
-	public Documento guardar(@RequestBody Documento documento) {
-		return documentoServicio.guardar(documento);
-	}
 
 	@PostMapping(value = "/comprar")
 	public DetalleDocumento comprar(@RequestBody DetalleDocumento documento) {
