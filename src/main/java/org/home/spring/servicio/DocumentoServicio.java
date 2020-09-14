@@ -3,6 +3,8 @@
  */
 package org.home.spring.servicio;
 
+import java.math.BigDecimal;
+
 import org.home.spring.dao.DocumentoDao;
 import org.home.spring.modelo.DetalleDocumento;
 import org.home.spring.modelo.Documento;
@@ -72,7 +74,12 @@ public class DocumentoServicio {
 	 */
 	@Transactional
 	public DetalleDocumento comprar(DetalleDocumento documento) {
-			kardexServicio.registrarKardexIngreso(documento, TipoOperacionEnum.INGC);
+		documento.getProducto()
+				.setPrecioVenta(documento.getSubtotalProducto()
+						.add(documento.getSubtotalProducto()
+								.multiply(new BigDecimal(documento.getProducto().getPorcentajeUtilidad()))
+								.divide(new BigDecimal(100))));
+		kardexServicio.registrarKardexIngreso(documento, TipoOperacionEnum.INGC);
 		return documento;
 	}
 

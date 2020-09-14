@@ -24,7 +24,6 @@ import javax.persistence.Transient;
 import org.home.spring.modelo.enumerado.TipoMovimientoEnum;
 import org.home.spring.modelo.enumerado.TipoOperacionEnum;
 
-
 /**
  * Clase que representa a la tabla kardex y que permite llevar el historico de
  * movimientos realizados en un producto
@@ -67,16 +66,22 @@ public class Kardex implements Serializable {
 	@Column(name = "precio_unitario", nullable = false, precision = 15, scale = 4)
 	private BigDecimal precioUnitario;
 
+	@Column(name = "total", nullable = false, precision = 15, scale = 4)
+	private BigDecimal total;
+
 	@Column(name = "saldo_cantidad", nullable = false)
 	private Long saldoCantidad;
 
 	@Column(name = "saldo_precio_unitario", nullable = false, precision = 15, scale = 4)
 	private BigDecimal saldoPrecioUnitario;
 
+	@Column(name = "saldo_total", nullable = false, precision = 15, scale = 4)
+	private BigDecimal saldoTotal;
+
 	@Column(name = "tipo_movimiento")
 	@Enumerated(EnumType.STRING)
 	private TipoMovimientoEnum tipoMovimiento;
-	
+
 	@Transient
 	private String detalle;
 
@@ -158,6 +163,24 @@ public class Kardex implements Serializable {
 
 	public void setTipoMovimiento(TipoMovimientoEnum tipoMovimiento) {
 		this.tipoMovimiento = tipoMovimiento;
+	}
+	
+	
+
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+	public BigDecimal getSaldoTotal() {
+		return saldoTotal;
+	}
+
+	public void setSaldoTotal(BigDecimal saldoTotal) {
+		this.saldoTotal = saldoTotal;
 	}
 
 	public String getDetalle() {

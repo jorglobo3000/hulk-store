@@ -41,19 +41,45 @@ public class KardexServicio {
 	 */
 	@Transactional
 	public void registrarKardexIngreso(DetalleDocumento detalleDocumento, TipoOperacionEnum tipoOperacion) {
+		
 		Kardex kardex = registrarKardex(detalleDocumento);
 		kardex.setTipoMovimiento(TipoMovimientoEnum.ING);
 		Producto producto = productoServicio.aumentarInventario(detalleDocumento.getProducto().getId(),
 				detalleDocumento.getCantidad());
-		if (producto.getPrecioCompra() == BigDecimal.ZERO) {
+		if (producto.getStock() == 0l) {
 			producto.setPrecioCompra(detalleDocumento.getProducto().getPrecioCompra());
-			producto.setPrecioVenta(producto.getPrecioCompra().multiply(new BigDecimal(1.15)));
+			producto.setPrecioVenta(detalleDocumento.getProducto().getPrecioVenta());
+		} else {
+			producto.setPrecioVenta(calcularPromedio(detalleDocumento, producto));
 		}
+		kardex.setCantidad(detalleDocumento.getCantidad());
+		kardex.setPrecioUnitario(detalleDocumento.getSubtotalProducto());
+		kardex.setTotal(kardex.getPrecioUnitario().multiply(new BigDecimal(kardex.getCantidad())));
 		kardex.setSaldoCantidad(producto.getStock());
-		kardex.setSaldoPrecioUnitario(producto.getPrecioVenta().multiply(new BigDecimal(kardex.getCantidad())));
+		kardex.setSaldoPrecioUnitario(producto.getPrecioVenta());
+		kardex.setSaldoTotal(kardex.getSaldoPrecioUnitario().multiply(new BigDecimal(kardex.getSaldoCantidad())));
 		kardex.setTipoOperacion(tipoOperacion);
 		kardexDao.save(kardex);
 		productoServicio.guardar(producto);
+	}
+
+	/**
+	 * Metodo que calcula el promedio ponderado cuando se realzia un movimiento para
+	 * aumentar el stock
+	 * 
+	 * @param detalleDocumento
+	 * @param producto
+	 * @return
+	 */
+	private BigDecimal calcularPromedio(DetalleDocumento detalleDocumento, Producto producto) {
+		Long cantidadTotal = producto.getStock();
+		BigDecimal totalIngresos = detalleDocumento.getSubtotalProducto()
+				.multiply(new BigDecimal(detalleDocumento.getCantidad()));
+		BigDecimal totalExistencias = producto.getPrecioVenta()
+				.multiply(new BigDecimal(detalleDocumento.getProducto().getStock()));
+		totalExistencias = totalExistencias.add(totalIngresos);
+
+		return totalExistencias.divide(new BigDecimal(cantidadTotal));
 	}
 
 	/**
@@ -69,7 +95,10 @@ public class KardexServicio {
 		Producto producto = productoServicio.disminuirInventario(detalleDocumento.getProducto().getId(),
 				detalleDocumento.getCantidad());
 		kardex.setSaldoCantidad(producto.getStock());
-		kardex.setSaldoPrecioUnitario(producto.getPrecioVenta().multiply(new BigDecimal(kardex.getCantidad())));
+		kardex.setPrecioUnitario(producto.getPrecioVenta());
+		kardex.setSaldoPrecioUnitario(producto.getPrecioVenta());
+		kardex.setTotal(producto.getPrecioVenta().multiply(new BigDecimal(kardex.getCantidad())));
+		kardex.setSaldoTotal(kardex.getSaldoPrecioUnitario().multiply(new BigDecimal(kardex.getSaldoCantidad())));
 		kardex.setTipoOperacion(tipoOperacion);
 		kardexDao.save(kardex);
 		productoServicio.guardar(producto);
@@ -85,10 +114,9 @@ public class KardexServicio {
 			kardex.setDocumento(detalleDocumento.getDocumento());
 			kardex.setFecha(detalleDocumento.getDocumento().getFecha());
 		}
-		kardex.setPrecioUnitario(detalleDocumento.getProducto().getPrecioVenta()
-				.multiply(new BigDecimal(detalleDocumento.getCantidad())));
+		kardex.setPrecioUnitario(detalleDocumento.getProducto().getPrecioCompra());
 		kardex.setProducto(detalleDocumento.getProducto());
-
+		kardex.setTotal(kardex.getPrecioUnitario().multiply(new BigDecimal(kardex.getCantidad())));
 		return kardex;
 	}
 

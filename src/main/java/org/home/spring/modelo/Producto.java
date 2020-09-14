@@ -65,6 +65,9 @@ public class Producto implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private EstadoEnum estado;
 
+	@Column(name = "porcentaje_utilidad")
+	private Integer porcentajeUtilidad ;
+
 	@Transient
 	private Boolean enStock;
 
@@ -135,5 +138,15 @@ public class Producto implements Serializable {
 	public Boolean getEnStock() {
 		return this.stock > 0l;
 	}
+
+	public Integer getPorcentajeUtilidad() {
+		return porcentajeUtilidad;
+	}
+
+	public void setPorcentajeUtilidad(Integer porcentajeUtilidad) {
+		this.porcentajeUtilidad = porcentajeUtilidad;
+	}
+	
+	
 
 }
