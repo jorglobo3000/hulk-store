@@ -22,4 +22,6 @@ public interface PersonaDao extends CrudRepository<Persona, Long> {
 	
 	public Persona findByIdentificacion(String identificacion);
 	
+	public Persona findByUsernameAndPassword(String username, String password);
+	
 }

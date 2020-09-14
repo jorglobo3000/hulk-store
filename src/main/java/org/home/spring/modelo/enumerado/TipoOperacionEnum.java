@@ -8,8 +8,8 @@ package org.home.spring.modelo.enumerado;
  *
  */
 public enum TipoOperacionEnum {
-	INGC("Ingreso por compra a proveedor"), INGD("Ingreso por devolucion cliente"),
-	SALC("Salida por compra de cliente"), SALD("Salida por devolucion a proveedor"), INVI("Inventario inicial");
+	INGC("Compra"), INGD("Devolucion en ventas"),
+	SALC("Venta"), SALD("Devolucion en compras"), INVI("Inventario inicial");
 
 	private String descripcion;
 

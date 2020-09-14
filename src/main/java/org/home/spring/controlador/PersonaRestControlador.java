@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,9 +39,16 @@ public class PersonaRestControlador {
 	public Persona crearPersona(@RequestBody Persona persona) {
 		return personaServicio.guardar(persona);
 	}
-	
-	@GetMapping(value="listar/{identificacion}")
+
+	@GetMapping(value = "listar/{identificacion}")
 	public Persona buscarPorIdentificacion(@PathVariable String identificacion) {
 		return personaServicio.obtenerPorIdentificacion(identificacion);
+	}
+
+	@PostMapping(value = "login")
+	public Persona obtenerPorLogin(@RequestBody Persona persona) {
+		Persona per = personaServicio.login(persona.getUsername(), persona.getPassword());
+		per.setPassword(null);
+		return per;
 	}
 }

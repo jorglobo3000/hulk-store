@@ -19,3 +19,4 @@ insert into Productos (nombre, stock, stock_emergencia, precio_compra, precio_ve
 
 insert into Personas (ciudad, correo_electronico, direccion, identificacion, nombre, telefono, tipo_persona, username, password, estado) values ('QUITO', 'consumidor@final.com', 'Quito', '9999999999', 'Consumidor final', '0', 'CLI', 'consumidor', '', 'ACT');   
 
+insert into Personas (ciudad, correo_electronico, direccion, identificacion, nombre, telefono, tipo_persona, username, password, estado) values ('QUITO', 'administrador@final.com', 'Quito', '1002976981', 'Administrador', '0', 'ADM', 'administrador', '91f5167c34c400758115c2a6826ec2e3', 'ACT');   

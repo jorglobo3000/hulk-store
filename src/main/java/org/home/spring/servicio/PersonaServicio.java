@@ -74,4 +74,9 @@ public class PersonaServicio {
 	public Persona obtenerPorIdentificacion(String identificacion) {
 		return personaDao.findByIdentificacion(identificacion);
 	}
+	
+	@Transactional(readOnly = true)
+	public Persona login(String username, String password) {
+		return personaDao.findByUsernameAndPassword(username, password);
+	}
 }

@@ -8,7 +8,7 @@ package org.home.spring.modelo.enumerado;
  *
  */
 public enum TipoPersonaEnum {
-	CLI("Cliente"), PRO("Proveedor");
+	CLI("Cliente"), PRO("Proveedor"),ADM("Administrador");
 
 	private String descripcion;
 

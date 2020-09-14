@@ -161,6 +161,6 @@ public class Kardex implements Serializable {
 	}
 
 	public String getDetalle() {
-		return this.tipoOperacion.getDescripcion()+" con documento: "+this.documento.getNumeroDocumento();
+		return this.tipoOperacion.getDescripcion();
 	}
 }
