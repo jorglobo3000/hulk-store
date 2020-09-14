@@ -35,7 +35,7 @@ public class DocumentoServicioTest {
 
 	@Autowired
 	private ProductoServicio productoServicio;
-	
+
 	@Autowired
 	private DetalleDocumentoServicio detalleDocumentoServicio;
 
@@ -77,7 +77,9 @@ public class DocumentoServicioTest {
 	@Test
 	public void comprar() {
 		conf();
-		Assertions.assertTrue(documentoServicio.comprar(documento).getTipoDocumento().equals(TipoDocumentoEnum.FAC));
+		DetalleDocumento detalleDocumento = documento.getDetalle().get(0);
+		detalleDocumento.setDocumento(null);
+		Assertions.assertNotNull(documentoServicio.comprar(detalleDocumento));
 	}
 
 	@Test
@@ -87,6 +89,6 @@ public class DocumentoServicioTest {
 		DetalleDocumento detalle = documento.getDetalle().get(0);
 		detalle.setCantidad(12345L);
 		Assertions.assertTrue(detalleDocumentoServicio.guardar(detalle).getCantidad().equals(12345l));
-	}	
-	
+	}
+
 }

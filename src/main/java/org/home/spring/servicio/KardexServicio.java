@@ -4,6 +4,7 @@
 package org.home.spring.servicio;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
 
@@ -79,7 +80,7 @@ public class KardexServicio {
 				.multiply(new BigDecimal(detalleDocumento.getProducto().getStock()));
 		totalExistencias = totalExistencias.add(totalIngresos);
 
-		return totalExistencias.divide(new BigDecimal(cantidadTotal));
+		return totalExistencias.divide(new BigDecimal(cantidadTotal), RoundingMode.HALF_UP);
 	}
 
 	/**
