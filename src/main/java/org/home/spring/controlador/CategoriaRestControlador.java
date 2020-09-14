@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * REst controlaor que forma parte del api y permite acceso a listar las
+ * categorias de los productos
+ * 
  * @author casa
  *
  */
@@ -24,9 +27,14 @@ public class CategoriaRestControlador {
 
 	@Autowired
 	private CategoriaServicio categoriaServicio;
-	
+
+	/**
+	 * Servicio que permite listar las categorias
+	 * 
+	 * @return
+	 */
 	@GetMapping(value = "/listar")
-	public List<Categoria> listarCategorias(){
+	public List<Categoria> listarCategorias() {
 		return categoriaServicio.listarCategorias();
 	}
 }

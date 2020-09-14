@@ -3,6 +3,7 @@
  */
 package org.home.spring.controlador;
 
+import org.apache.tomcat.util.security.MD5Encoder;
 import org.home.spring.modelo.Persona;
 import org.home.spring.modelo.enumerado.EstadoEnum;
 import org.home.spring.modelo.enumerado.TipoPersonaEnum;
@@ -23,12 +24,7 @@ public class PersonaRestControladorTest {
 	private PersonaRestControlador personaRestControlador;
 
 	@Test
-	public void deberiaListarClientes() {
-		Assertions.assertNotNull(personaRestControlador.listarClientes());
-	}
-
-	@Test
-	public void deberiaCrearPersona() {
+	void deberiaCrearPersona() {
 		Persona persona = new Persona();
 		persona.setCiudad("Quito");
 		persona.setCorreoElectronico("prueba@prueba.com");
@@ -41,4 +37,21 @@ public class PersonaRestControladorTest {
 		Assertions.assertNotNull(personaRestControlador.crearPersona(persona));
 	}
 
+	@Test
+	void deberiaObtenerPorIdentificacion() {
+		Assertions.assertNotNull(personaRestControlador.buscarPorIdentificacion("9999999999"));
+	}
+
+	@Test
+	void deberiaObtenerPorLogin() {
+		Persona per = new Persona();
+		per.setUsername("admin");
+		per.setPassword(MD5Encoder.encode("admin".getBytes()));
+		Assertions.assertNotNull(personaRestControlador.obtenerPorLogin(per));
+	}
+
+	@Test
+	void deberiaOtenerPorTipoPersona() {
+		Assertions.assertNotNull(personaRestControlador.listarPorTipoPersona("CLI"));
+	}
 }
