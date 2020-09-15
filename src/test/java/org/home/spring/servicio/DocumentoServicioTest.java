@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.home.spring.excepcion.StockExcepcion;
 import org.home.spring.modelo.DetalleDocumento;
 import org.home.spring.modelo.Documento;
 import org.home.spring.modelo.enumerado.EstadoEnum;
@@ -69,7 +70,7 @@ public class DocumentoServicioTest {
 	}
 
 	@Test
-	public void vender() {
+	public void vender() throws StockExcepcion {
 		conf();
 		Assertions.assertTrue(documentoServicio.vender(documento).getTipoDocumento().equals(TipoDocumentoEnum.FAC));
 	}

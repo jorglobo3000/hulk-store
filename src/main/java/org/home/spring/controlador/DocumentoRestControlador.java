@@ -8,10 +8,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.home.spring.excepcion.StockExcepcion;
 import org.home.spring.modelo.DetalleDocumento;
 import org.home.spring.modelo.Documento;
 import org.home.spring.servicio.DocumentoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -82,7 +84,11 @@ public class DocumentoRestControlador {
 			documento.setFecha(new Date());
 			Documento doc = documentoServicio.vender(documento);
 			return new ResponseEntity<Documento>(doc, HttpStatus.OK);
-		} catch (Exception e) {
+		} catch (StockExcepcion e) {
+			Map<String, String> respuesta = new HashMap<>();
+			respuesta.put("mensaje", "Productos sin Stock suficiente: " + e.getMessage());
+			return new ResponseEntity<Map<String, String>>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (DataAccessException e) {
 			Map<String, String> respuesta = new HashMap<>();
 			respuesta.put("mensaje", "Ocurrio un error al realizar la venta");
 			return new ResponseEntity<Map<String, String>>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);

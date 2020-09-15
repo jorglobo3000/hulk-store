@@ -39,8 +39,20 @@ public class PersonaRestControlador {
 	private PersonaServicio personaServicio;
 
 	@PostMapping(value = "/guardar")
-	public Persona crearPersona(@RequestBody Persona persona) {
-		return personaServicio.guardar(persona);
+	public ResponseEntity<?> crearPersona(@RequestBody Persona persona) {
+		try {
+			if(persona.getIdentificacion()==null) {
+				Map<String, String> respuesta = new HashMap<>();
+				respuesta.put("mensaje", "LLene todos los campos del usuario");
+				return new ResponseEntity<Map<String, String>>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			persona = personaServicio.guardar(persona);
+			return new ResponseEntity<Persona>(persona, HttpStatus.OK);
+		} catch (DataAccessException e) {
+			Map<String, String> respuesta = new HashMap<>();
+			respuesta.put("mensaje", "No se pudo guardar el usuario");
+			return new ResponseEntity<Map<String, String>>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	/**
